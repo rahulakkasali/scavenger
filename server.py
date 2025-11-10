@@ -25,11 +25,20 @@ import json
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-MONGO_URL="mongodb+srv://scarfacetrade0111_db_user:<db_password>@scavenger.jej13y2.mongodb.net/?appName=Scavenger"
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['Scavenger']]
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+
+uri = "mongodb+srv://scarfacetrade0111_db_user:<1fsP9UxKObx2atCs>@scavenger.jej13y2.mongodb.net/?appName=Scavenger"
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
 
 # Create the main app without a prefix
 app = FastAPI()
