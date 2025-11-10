@@ -26,9 +26,10 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
+MONGO_URL="mongodb+srv://scarfacetrade0111_db_user:<db_password>@scavenger.jej13y2.mongodb.net/?appName=Scavenger"
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[os.environ['Scavenger']]
 
 # Create the main app without a prefix
 app = FastAPI()
